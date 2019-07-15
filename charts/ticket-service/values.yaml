@@ -5,8 +5,8 @@ minReplicas: 3
 maxReplicas: 15
 
 image:
-  repository: draft
-  tag: dev
+  repository: 10.107.238.165:5000/csi-aura/service-ticket
+  tag: 0.0.1
   pullPolicy: IfNotPresent
 
 # define environment variables here as a map of key: value
