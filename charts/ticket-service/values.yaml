@@ -14,7 +14,7 @@ env:
   KAFKA_TOPICS: update_channel:3:1
 # enable this flag to use knative serve to deploy the app
 knativeDeploy: false
-mongoConnexion: true
+mongoConnexion: true 
 
 service:
   name: service-ticket
