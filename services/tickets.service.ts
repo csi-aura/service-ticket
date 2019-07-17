@@ -57,9 +57,9 @@ const ticketService: ServiceSchema = {
 				/**Lecture de tous les messages du/des topics abonnées */
 				eachMessage: async ({ topic, partition, message }: any) => {
 
-					/**Filtre les message consernant les tickets et ne venant pas de ce groupe de service */
+					/**Filtre les message consernant les convive et ne venant pas de ce groupe de service */
 					if (
-						message.headers.kind === "ticket" &&
+						message.headers.kind === "convive" &&
 						message.headers.groupId != kafkaDriver.groupId
 					) {
 						this.logger.info(
