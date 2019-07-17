@@ -56,11 +56,10 @@ const ticketService: ServiceSchema = {
 			kafkaDriver.receive().run({
 				/**Lecture de tous les messages du/des topics abonnées */
 				eachMessage: async ({ topic, partition, message }: any) => {
-
 					/**Filtre les message consernant les convive et ne venant pas de ce groupe de service */
 					if (
-						message.headers.kind === "convive" &&
-						message.headers.groupId != kafkaDriver.groupId
+						message.headers.kind.toString() === "convive" &&
+						message.headers.groupId.toString() != kafkaDriver.groupId
 					) {
 						this.logger.info(
 							`Demande de modification de base venant d'un autre service :
@@ -73,7 +72,7 @@ const ticketService: ServiceSchema = {
 
 
 						/**CRUD Routes */
-						switch (message.headers.crud_action) {
+						switch (message.headers.crud_action.toString()) {
 							case "CREATE":
 								break;
 							case "UPDATE":
