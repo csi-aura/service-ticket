@@ -57,7 +57,7 @@ spec:
 
         - name: KAFKA_URI
           valueFrom:
-            secretKeyRef:
+            configMapKeyRef:
               name: kafka-config
               key: kafka_brokers
 
