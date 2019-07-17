@@ -11,7 +11,7 @@ image:
 
 # define environment variables here as a map of key: value
 env:
-  KAFKA_TOPICS: update_channel:3:1
+  KAFKA_TOPICS: update_channel
 # enable this flag to use knative serve to deploy the app
 knativeDeploy: false
 mongoConnexion: true 
