@@ -56,22 +56,21 @@ const ticketService: ServiceSchema = {
 			kafkaDriver.receive().run({
 				/**Lecture de tous les messages du/des topics abonnées */
 				eachMessage: async ({ topic, partition, message }: any) => {
-					this.logger.info(`Kafka message incoming ! >
-					Topic : ${topic}
-					Type de donnée : ${message.headers.kind}
-					Action effectuée : ${message.headers.crud_action}
-					Provient du client : ${message.headers.clientId}
-					Le client provient du groupe : ${message.headers.groupId}
-					Data : ${message.value}`);
 
 					/**Filtre les message consernant les tickets et ne venant pas de ce groupe de service */
 					if (
-						message.headers.king === "ticket" &&
+						message.headers.kind === "ticket" &&
 						message.headers.groupId != kafkaDriver.groupId
 					) {
 						this.logger.info(
-							`Demande de modification de base venant d'un autre service`
-						);
+							`Demande de modification de base venant d'un autre service :
+								Topic : ${topic}
+								Type de donnée : ${message.headers.kind}
+								Action effectuée : ${message.headers.crud_action}
+								Provient du client : ${message.headers.clientId}
+								Le client provient du groupe : ${message.headers.groupId}
+								Data : ${message.value}`);
+
 
 						/**CRUD Routes */
 						switch (message.headers.crud_action) {
