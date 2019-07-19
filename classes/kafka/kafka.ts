@@ -54,18 +54,25 @@ export class KafkaDriver {
 		await this.producer.disconnect();
 	}
 
-	public async send(action: string, data: {}) {
+	public async send(action: string, data:any) {
+		let message = {
+			/** Header du message */
+			headers : {
+				kind: "ticket",
+				crud_action: action,
+				groupId: this.groupId,
+				clientId: this.clientId
+			},
+			/** Les data du message */
+			data: data
+		}
+
+
 		await this.producer.send({
 			topic: "update_channel",
 			messages: [
 				{
-					headers: {
-						kind: "ticket",
-						crud_action: action,
-						groupId: this.groupId,
-						clientId: this.clientId
-					},
-					value: Buffer.from(JSON.stringify(data))
+					value: Buffer.from(JSON.stringify(message))
 				}
 			]
 		});
